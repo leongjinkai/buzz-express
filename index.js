@@ -15,6 +15,7 @@ import helmet from "helmet";
 import morgan from "morgan";
 import path from "path";
 import { fileURLToPath } from "url";
+import { register } from "./controllers/auth.js"
 
 // Configuration
 // To get the file path
@@ -47,6 +48,9 @@ const storage = multer.diskStorage({
 });
 // This variable is used whenever there needs to have an upload function
 const upload = multer({ storage })
+
+// Routes with files
+app.post("/auth/register", upload.single("picture"), register)
 
 // Mongoose Setup
 const PORT = process.env.PORT || 6001;
